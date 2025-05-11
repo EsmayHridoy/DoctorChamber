@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Registration</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="{% static 'js/script.js' %}"></script>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Register New User</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <label for="first_name">First Name:</label>
+            <input type="text" name="first_name" required>
+
+            <label for="middle_name">Middle Name:</label>
+            <input type="text" name="middle_name">
+
+            <label for="last_name">Last Name:</label>
+            <input type="text" name="last_name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" name="email" required>
+
+            <label for="password">Password:</label>
+            <input type="password" name="password" required>
+
+            <label for="role">Role:</label>
+            <select name="role" required>
+                {% for role in roles %}
+                    <option value="{{ role.id }}">{{ role.role }}</option>
+                {% endfor %}
+            </select>
+
+            <button type="submit">Register</button>
+        </form>
+    </div>
+    {% if email_exists == True %}
+        <script>
+            alert("Email already exists!");
+        </script>
+    {% elif email_exists == False %}
+        <script>
+            alert("Registration Successful! Waiting for the approval...");
+        </script>
+    {% endif %}
+</body>
+</html>

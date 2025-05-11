@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>General User Dashboard</title>
+</head>
+<body>
+    <h1>Welcome General User</h1>
+    <p>This is your dashboard. You can view your profile, appointments, and results.</p>
+    <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+    </form>
+
+    <h2>Available Doctors</h2>
+    <ul>
+        {% for doctor in doctors %}
+            <li>
+                Dr. {{ doctor.first_name }} {{ doctor.last_name }}
+                <form action="{% url 'take_appointment' doctor.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit">Take Appointment</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <h2>Booked Appointments</h2>
+    {% for appointment in appointments %}
+        <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
+            <strong>Date:</strong> {{ appointment.appointment_date }}<br>
+            <strong>Doctor:</strong> {{ appointment.doctor.first_name }} {{ appointment.doctor.last_name }}<br>
+            <strong>Serial:</strong> {{ appointment.serial_number }}<br>
+            <strong>Token:</strong> {{ appointment.token_number }}<br>
+            <strong>Completed:</strong> {{ appointment.is_completed }}<br>
+            <strong>Doctor's Comment:</strong> 
+            {% if appointment.comment %}
+                {{ appointment.comment }}
+            {% else %}
+                No comment yet.
+            {% endif %}
+            <form method="POST" action="{% url 'delete_appointment' appointment.id %}">
+                {% csrf_token %}
+                <button type="submit">Delete</button>
+            </form>
+        </div>
+    {% empty %}
+        <p>No appointments booked.</p>
+    {% endfor %}
+    </ul>
+</body>
+</html>

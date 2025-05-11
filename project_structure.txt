@@ -1,0 +1,32 @@
+core
+|--core
+|  |--asgi.py
+|  |--settings.py
+|  |--urls.py
+|  |--views.py
+|  |--wsgi.py
+|--dashboard
+|  |--admin.py
+|  |--apps.py
+|  |--models.py
+|  |--tests.py
+|  |--urls.py
+|  |--views.py
+|--frontend
+|  |--static
+|  |--templates
+|--login
+|  |--admin.py
+|  |--apps.py
+|  |--models.py
+|  |--tests.py
+|  |--urls.py
+|  |--views.py
+|--registration
+|  |--admin.py
+|  |--apps.py
+|  |--models.py
+|  |--tests.py
+|  |--urls.py
+|  |--views.py
+|--manage.py

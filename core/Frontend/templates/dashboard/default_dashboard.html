@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Default Dashboard</title>
+</head>
+<body>
+    <h1>Welcome</h1>
+    <p>Your role is not recognized. Please contact the administrator.</p>
+
+    <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+    </form>
+</body>
+</html>
